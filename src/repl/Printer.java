@@ -75,4 +75,9 @@ public class Printer {
 		System.err.println("Unknown command.");
 		welcomeMessage();
 	}
+	
+	protected void InvalidIdentifiers() {
+		System.err.println("Unknown column descriptor or information label.");
+		welcomeMessage();
+	}
 }

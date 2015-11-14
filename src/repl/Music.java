@@ -2,8 +2,6 @@ package repl;
 
 public class Music {
 	
-	private static Music instance = null;
-	
 	private String songName;
 	private String songStyle;
 	private String songDuration;
@@ -21,17 +19,8 @@ public class Music {
 	private String albumDate;
 	private String albumTrackNumber;
 	
-	private Music(){
+	public Music(){
 		super();
-	}
-	
-	/**
-	* @return une instance de Music
-	*/
-	public static Music instance(){
-		if(instance==null)
-			instance = new Music();
-		return instance;
 	}
 	
 	/**

@@ -7,18 +7,23 @@ import java.io.InputStreamReader;
 public class CLI {
 
 	// Un objet contenant la requette put
-	private Object request;
+	private Music song;
 
 	private Printer view;
 
 	private BufferedReader input;
 
 	private int exitsignal;
+	
+	private String[] songInformationLabels = {"name", "musicstyle", "duration", "pathtomp3", "pathtocover","score", "releasedate"};
+	private String[] artistInformationLabels = {"name", "description"};
+	private String[] albumInformationLabels = {"name", "releasedate", "tracknumber"};
 
 	public CLI() {
 		view = new Printer();
 		input = new BufferedReader(new InputStreamReader(System.in));
 		exitsignal = 0;
+		song = null;
 	}
 
 	/**
@@ -26,8 +31,6 @@ public class CLI {
 	 * @param input
 	 *            Contains the name of the song. The function handles the
 	 *            suppresion of the word "song "
-	 *            
-	 *      -> A COMPLETER
 	 */
 	private void createSong(String input) {
 		// remove "song " from the command
@@ -36,15 +39,47 @@ public class CLI {
 		
 		if(!input.isEmpty())
 		{
-			/**
-			 * Create put request where song name is input
-			 */
-			request = new Object();
+			song = new Music();
 
 			view.NewSongRequest(input);
 		} else {
 			view.MissingArgument();
 		}
+	}
+	
+	/**
+	 * CHecks that the information given fit our database
+	 * @param columnDescriptor	columndescriptor of the input
+	 * @param informationLabel	informationLabel of the input
+	 * @return True if the information fit the database, else false
+	 */
+	private Boolean checkInformation(String columnDescriptor, String informationLabel)
+	{
+		if(columnDescriptor.compareTo("songinfo") == 0)
+		{
+			for (String label : songInformationLabels) {
+				if(informationLabel.compareTo(label) == 0)
+					return true;
+			}
+		}
+		
+		if(columnDescriptor.compareTo("artist") == 0)
+		{
+			for (String label : artistInformationLabels) {
+				if(informationLabel.compareTo(label) == 0)
+					return true;
+			}
+		}
+		
+		if(columnDescriptor.compareTo("album") == 0)
+		{
+			for (String label : albumInformationLabels) {
+				if(informationLabel.compareTo(label) == 0)
+					return true;
+			}
+		}
+			
+		return false;
 	}
 	
 	/**
@@ -57,19 +92,26 @@ public class CLI {
 	{
 		//remove "information " from the command
 		input = input.substring(12);
-		
+
 		String[] indexes = input.split(" ");
 		
 		if(indexes.length >= 3)
 		{
-			/**
-			 * Add to put request informations where col is the column and info the data
-			 */			
-			if(indexes.length > 3 )
-				for (int i=3; i< indexes.length; i++) {
-					indexes[2] = indexes[2].concat(indexes[i]);
-				}
-			view.NewInformationinRequest(indexes[0], indexes[1], indexes[2]);
+			if(checkInformation(indexes[0], indexes[1]) == true)
+			{
+				if(indexes.length > 3 )
+					for (int i=3; i< indexes.length; i++) {
+						indexes[2] = indexes[2].concat(indexes[i]);
+					}
+				
+				/**
+				 * Add to put request informations where col is the column and info the data
+				 */
+				
+				view.NewInformationinRequest(indexes[0], indexes[1], indexes[2]);
+			} else {
+				view.InvalidIdentifiers();
+			}
 		} else {
 			view.MissingArgument();
 		}
@@ -85,18 +127,18 @@ public class CLI {
 		input = input.substring(4);
 		
 		//Add a new song only if a song is not being registered
-		if(input.contains("song ") && request == null)
+		if(input.contains("song ") && song == null)
 		{
 			createSong(input);
-		} else if (input.contains("song ") && request != null) {
+		} else if (input.contains("song ") && song != null) {
 			view.ExistingPutRequest();
 		}
 		
 		//Add information to a song only if a song is being registered
-		if(input.contains("information ") && request != null)
+		if(input.contains("information ") && song != null)
 		{
 			addInformationToSong(input);
-		} else if (input.contains("information ") && request == null) {
+		} else if (input.contains("information ") && song == null) {
 			view.NoExistingSong();
 		}
 	}
@@ -111,7 +153,7 @@ public class CLI {
 		/**
 		 * Commit the put request
 		 */
-		request = null;
+		song = null;
 		view.CommitedRequest();
 	}
 	
@@ -120,8 +162,8 @@ public class CLI {
 	 * @param input the input.
 	 */
 	private void eval(String input) {
-		// Determined the type of command
-
+		input = input.toLowerCase();
+		
 		if (input.contains("add ")) {
 			addToPull(input);
 			return;
@@ -131,10 +173,10 @@ public class CLI {
 		/**
 		 * add a control if informations are empty
 		 */
-		if (input.contains("commit") && request != null) {
+		if (input.contains("commit") && song != null) {
 			performCommit();
 			return;
-		} else if (input.contains("commit") &&  request == null) {
+		} else if (input.contains("commit") &&  song == null) {
 			view.NoExistingSong();
 			return;
 		}
