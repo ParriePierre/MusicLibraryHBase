@@ -1,4 +1,4 @@
-package controller;
+package src.controller;
 
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
