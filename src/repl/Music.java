@@ -35,37 +35,51 @@ public class Music {
 	}
 	
 	/**
-	 * Display song infos
+	 * 
+	 * @return songInfos
 	 */
-	public void displaySong(){
-		System.out.print("Song infos:");
-		System.out.print("Name: "+this.songName);
-		System.out.print("Date: "+this.songDate);
-		System.out.print("Duration: "+this.songDuration);
-		System.out.print("Style: "+this.songStyle);
-		System.out.print("Mark: "+this.songMark);
-		System.out.print("Path: "+this.songPath);
-		System.out.print("Jacket path: "+this.songJacketPath);
+	public String getSongInfos(){
+		
+		String songInfos = "Song infos:";
+
+		songInfos.concat("\nName: "+this.songName);
+		songInfos.concat("\nDate: "+this.songDate);
+		songInfos.concat("\nDuration: "+this.songDuration);
+		songInfos.concat("\nStyle: "+this.songStyle);
+		songInfos.concat("\nMark: "+this.songMark);
+		songInfos.concat("\nPath: "+this.songPath);
+		songInfos.concat("\nJacket path: "+this.songJacketPath);
+		
+		return songInfos;
 	}
 	
 	/**
-	 * Display artist infos
+	 * 
+	 * @return artist Infos
 	 */
-	public void displayArtis(){
-		System.out.print("Artist infos:");
-		System.out.print("Name: "+this.artistName);
-		System.out.print("Bday: "+this.artistBday);
-		System.out.print("Bio: "+this.artistBio);
+	public String getArtistInfos(){
+		
+		String artistInfos = "Artist infos";
+		
+		artistInfos.concat("\nName: "+this.artistName);
+		artistInfos.concat("\nBday: "+this.artistBday);
+		artistInfos.concat("\nBio: "+this.artistBio);
+		
+		return artistInfos;
 	}
 	
 	/**
-	 * Display album infos
+	 * @return Album infos
 	 */
-	public void displayAlbum(){
-		System.out.print("Album infos:");
-		System.out.print("Name: "+this.albumName);
-		System.out.print("Style: "+this.albumStyle);
-		System.out.print("Date: "+this.albumDate);
+	public String getAlbumInfos(){
+		
+		String albumInfos = "Album infos:";
+		
+		albumInfos.concat("Name: "+this.albumName);
+		albumInfos.concat("Style: "+this.albumStyle);
+		albumInfos.concat("Date: "+this.albumDate);
+		
+		return albumInfos;
 	}
 	
 	/**
