@@ -39,8 +39,8 @@ public class Printer {
 		System.out.print(">");
 	}
 	
-	protected void NewInformationinRequest(String col, String value) {
-		System.out.println("The information "+col+" : "+value+" has been added to the request.");
+	protected void NewInformationinRequest(String col, String Label, String value) {
+		System.out.println("The information "+col+" : "+Label+" : "+value+" has been added to the request.");
 		System.out.print(">");
 	}
 	

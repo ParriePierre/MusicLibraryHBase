@@ -13,22 +13,11 @@ public class CLI {
 
 	private BufferedReader input;
 
-	private int SpaceLocation;
-	private int secondSpaceLocation;
-	private String columnDescriptor;
-	private String informationLabel;
-	private String informationValue;
-
 	private int exitsignal;
 
 	public CLI() {
 		view = new Printer();
 		input = new BufferedReader(new InputStreamReader(System.in));
-		SpaceLocation = -1;
-		secondSpaceLocation = -1;
-		columnDescriptor = "";
-		informationLabel = "";
-		informationValue = "";
 		exitsignal = 0;
 	}
 
@@ -44,12 +33,18 @@ public class CLI {
 		// remove "song " from the command
 		// Only the song name remains
 		input = input.substring(4);
+		
+		if(!input.isEmpty())
+		{
+			/**
+			 * Create put request where song name is input
+			 */
+			request = new Object();
 
-		/**
-		 * Create put request where song name is input
-		 */
-
-		view.NewSongRequest(input);
+			view.NewSongRequest(input);
+		} else {
+			view.MissingArgument();
+		}
 	}
 	
 	/**
@@ -60,39 +55,21 @@ public class CLI {
 	 */
 	private void addInformationToSong(String input)
 	{
-		String tmp;
-		
 		//remove "information " from the command
-		input = input.substring(11);
+		input = input.substring(12);
 		
-		//Obtain column name and information
-		SpaceLocation = input.indexOf(' ');
+		String[] indexes = input.split(" ");
 		
-		if(SpaceLocation != -1)
+		if(indexes.length >= 3)
 		{
-			columnDescriptor = input.substring(0, SpaceLocation);
-			
-			tmp = input.substring(SpaceLocation + 1);
-			secondSpaceLocation = tmp.indexOf(" ");
-			
-			if(SpaceLocation != -1)
-			{
-				informationLabel = tmp.substring(0, secondSpaceLocation);
-				informationValue = tmp.substring(secondSpaceLocation + 1);
-				
-				/**
-				 * Add to put request informations where col is the column and info the data
-				 */
-				
-				SpaceLocation = -1;
-				columnDescriptor = "";
-				informationLabel = "";
-				informationValue = "";
-				
-				view.NewSongRequest(input);
-			} else {
-				view.MissingArgument();
-			}
+			/**
+			 * Add to put request informations where col is the column and info the data
+			 */			
+			if(indexes.length > 3 )
+				for (int i=3; i< indexes.length; i++) {
+					indexes[2] = indexes[2].concat(indexes[i]);
+				}
+			view.NewInformationinRequest(indexes[0], indexes[1], indexes[2]);
 		} else {
 			view.MissingArgument();
 		}
@@ -134,7 +111,7 @@ public class CLI {
 		/**
 		 * Commit the put request
 		 */
-
+		request = null;
 		view.CommitedRequest();
 	}
 	
@@ -156,7 +133,8 @@ public class CLI {
 		 */
 		if (input.contains("commit") && request != null) {
 			performCommit();
-		} else if (input.contains("commit") && request == null) {
+			return;
+		} else if (input.contains("commit") &&  request == null) {
 			view.NoExistingSong();
 			return;
 		}
@@ -171,6 +149,7 @@ public class CLI {
 	}
 
 	public void loop() {
+		view.welcomeMessage();
 		do {
 			try {
 				eval(input.readLine());
