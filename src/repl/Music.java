@@ -31,13 +31,13 @@ public class Music {
 		
 		String songInfos = "Song infos:";
 
-		songInfos.concat("\nName: "+this.songName);
-		songInfos.concat("\nDate: "+this.songDate);
-		songInfos.concat("\nDuration: "+this.songDuration);
-		songInfos.concat("\nStyle: "+this.songStyle);
-		songInfos.concat("\nMark: "+this.songMark);
-		songInfos.concat("\nPath: "+this.songPath);
-		songInfos.concat("\nJacket path: "+this.songJacketPath);
+		songInfos = songInfos.concat("\nName: "+this.songName);
+		songInfos = songInfos.concat("\nDate: "+this.songDate);
+		songInfos = songInfos.concat("\nDuration: "+this.songDuration);
+		songInfos = songInfos.concat("\nStyle: "+this.songStyle);
+		songInfos = songInfos.concat("\nMark: "+this.songMark);
+		songInfos = songInfos.concat("\nPath: "+this.songPath);
+		songInfos = songInfos.concat("\nJacket path: "+this.songJacketPath);
 		
 		return songInfos;
 	}
@@ -50,9 +50,9 @@ public class Music {
 		
 		String artistInfos = "Artist infos";
 		
-		artistInfos.concat("\nName: "+this.artistName);
-		artistInfos.concat("\nBday: "+this.artistBday);
-		artistInfos.concat("\nBio: "+this.artistBio);
+		artistInfos = artistInfos.concat("\nName: "+this.artistName);
+		artistInfos = artistInfos.concat("\nBday: "+this.artistBday);
+		artistInfos = artistInfos.concat("\nBio: "+this.artistBio);
 		
 		return artistInfos;
 	}
@@ -64,9 +64,9 @@ public class Music {
 		
 		String albumInfos = "Album infos:";
 		
-		albumInfos.concat("Name: "+this.albumName);
-		albumInfos.concat("Style: "+this.albumStyle);
-		albumInfos.concat("Date: "+this.albumDate);
+		albumInfos = albumInfos.concat("\nName: "+this.albumName);
+		albumInfos = albumInfos.concat("\nStyle: "+this.albumStyle);
+		albumInfos = albumInfos.concat("\nDate: "+this.albumDate);
 		
 		return albumInfos;
 	}

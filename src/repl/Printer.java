@@ -4,8 +4,6 @@ public class Printer {
 	
 	protected void welcomeMessage() {
 		System.out.println("Commands : ");
-		System.out.println("add song <<song name>> : Create a song reqest");
-		System.out.println("	Only one song request may be instanciated at a time. You need to commit the request before creating a new one.");
 		System.out.println("add information <<column Descriptor>> <<information label>> <<information>> : add information to a song");
 		System.out.println("	You can only add information once a song request has been created.");
 		System.out.println("commit : Execute a put request in HBase.");
@@ -15,7 +13,7 @@ public class Printer {
 		System.out.println("Column descriptors :");
 		System.out.println("\t - Song : information labels : ");
 		System.out.println("\t\t - Name");
-		System.out.println("\t\t - MusicStyle");
+		System.out.println("\t\t - Style");
 		System.out.println("\t\t - Duration");
 		System.out.println("\t\t - PathToMP3");
 		System.out.println("\t\t - PathToCover");
@@ -23,7 +21,8 @@ public class Printer {
 		System.out.println("\t\t - ReleaseDate");
 		System.out.println("\t - Artist : information labels : ");
 		System.out.println("\t\t - Name");
-		System.out.println("\t\t - Description");
+		System.out.println("\t\t - Birthday");
+		System.out.println("\t\t - Biography");
 		System.out.println("\t - Album : information labels : ");
 		System.out.println("\t\t - Name");
 		System.out.println("\t\t - ReleaseDate");
@@ -44,8 +43,11 @@ public class Printer {
 		System.out.print(">");
 	}
 	
-	protected void CommitedRequest() {
-		System.out.println("The request has been commited.");
+	protected void CommitedRequest(String songInfos, String artistInfos, String albumInfos) {
+		System.out.println("The request has been commited with the datas :");
+		System.out.println(songInfos);
+		System.out.println(artistInfos);
+		System.out.println(albumInfos);
 		System.out.print(">");
 	}
 	
@@ -79,5 +81,10 @@ public class Printer {
 	protected void InvalidIdentifiers() {
 		System.err.println("Unknown column descriptor or information label.");
 		welcomeMessage();
+	}
+	
+	protected void AlreadyRegisteredValue()
+	{
+		System.err.println("The information has already been given. It will be overide.");
 	}
 }
