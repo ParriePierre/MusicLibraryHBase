@@ -64,9 +64,21 @@ public class Music {
 		
 		String albumInfos = "Album infos:";
 		
+<<<<<<< Updated upstream
 		albumInfos = albumInfos.concat("\nName: "+this.albumName);
 		albumInfos = albumInfos.concat("\nStyle: "+this.albumStyle);
 		albumInfos = albumInfos.concat("\nDate: "+this.albumDate);
+=======
+<<<<<<< HEAD
+		albumInfos = albumInfos.concat("Name: "+this.albumName);
+		albumInfos = albumInfos.concat("Style: "+this.albumStyle);
+		albumInfos = albumInfos.concat("Date: "+this.albumDate);
+=======
+		albumInfos = albumInfos.concat("\nName: "+this.albumName);
+		albumInfos = albumInfos.concat("\nStyle: "+this.albumStyle);
+		albumInfos = albumInfos.concat("\nDate: "+this.albumDate);
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 		
 		return albumInfos;
 	}

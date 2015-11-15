@@ -19,7 +19,10 @@ public class HBaseFunctions {
 	/**
 	 * Avant le REPL, initialisation
 	 */
-	public void initHabse() {
+	public String initHabse() {
+		//Failure
+		String failureStatus = null;
+		
 		//Configuration 
 		Configuration configuration = HBaseConfiguration.create();
 		
@@ -63,9 +66,11 @@ public class HBaseFunctions {
 			admin.createTable(tableDescriptor);
 	    }
 	    catch(IOException ex){
-	        System.out.println (ex.toString());
-	        System.out.println("An error occured during the creation of the table.");
+	    	failureStatus = "An error occured during the creation of the table.";
 	    }
+		finally{
+  	    	return failureStatus;
+  	    }
 	}
 		
 		/**
@@ -125,6 +130,9 @@ public class HBaseFunctions {
   	    catch(IOException ex){
   	    	failureStatus = "An error occured while adding the song.";
   	    }
+  		finally{
+  	    	return failureStatus;
+  	    }
   		
   		//Closing the htable
   		try{
@@ -133,7 +141,8 @@ public class HBaseFunctions {
   	    catch(IOException ex){
   	    	failureStatus = "An error occured during the HTable closing.";
   	    }
-  		
-  		return failureStatus;
+  		finally{
+  	    	return failureStatus;
+  	    }
 	}
 }
