@@ -2,22 +2,22 @@ package repl;
 
 public class Music {
 	
-	private String songName;
-	private String songStyle;
-	private String songDuration;
-	private String songPath;
-	private String songJacketPath;
-	private String songMark;
-	private String songDate;
+	private String songName = "";
+	private String songStyle = "";
+	private String songDuration = "";
+	private String songPath = "";
+	private String songJacketPath = "";
+	private String songMark = "";
+	private String songDate = "";
 	
-	private String artistName;
-	private String artistBday;
-	private String artistBio;
+	private String artistName = "";
+	private String artistBday = "";
+	private String artistBio = "";
 	
-	private String albumName;
-	private String albumStyle;
-	private String albumDate;
-	private String albumTrackNumber;
+	private String albumName = "";
+	private String albumStyle = "";
+	private String albumDate = "";
+	private String albumTrackNumber = "";
 	
 	public Music(){
 		super();
